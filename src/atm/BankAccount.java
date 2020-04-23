@@ -29,4 +29,12 @@ public class BankAccount {
 	public String toString() {
 		return "Name: " + name + "\nBalance: " +balance;
 	}
+	
+	public void depoist(double amount) {
+		this.balance +=amount;
+	}
+	
+	public void withdraw(double amount) {
+		this.balance -=amount;
+	}
 }
