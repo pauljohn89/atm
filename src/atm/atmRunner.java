@@ -11,30 +11,39 @@ public class atmRunner {
 		private static String name = "";
 		private static int pin = 0;
 		static Scanner scan = new Scanner(System.in);
+		private static double amount = 0.0;
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		Path fileToRead = Paths.get("./resources/data.txt");
 		List<String> list = Files.readAllLines(fileToRead);
 		BankAccount account = new BankAccount(list.get(0).toString(), Integer.parseInt(list.get(1)), Double.parseDouble(list.get(2)));
 		retrieveCredentials();
+		int i = 0;
 		if(login(account)) {
-			System.out.print("Choose option, W for withdaw or D for deposit: ");
-			String option = scan.next();
-			System.out.print("Enter Amount: ");
-			double amount = scan.nextDouble();
-			switch (option) {
-			case "W": 
-					account.withdraw(amount);
-					break;
-			case "D":
-					account.depoist(amount);
-					break;
-			default:
-					System.out.println("Invalid options selected");
-					
-			}
-			System.out.println(account);
-			
+			do {
+				System.out.print("Choose option, W for withdaw or D for deposit or E to exit: ");
+				String option = scan.next();
+				switch (option.toUpperCase()) {
+				case "W": 
+						System.out.print("Enter Amount: ");
+						amount = scan.nextDouble();
+						account.withdraw(amount);
+						break;
+				case "D":
+						System.out.print("Enter Amount: ");
+						amount = scan.nextDouble();
+						account.depoist(amount);
+						break;
+				case "E":
+						i++;
+					    break;
+				default:
+						System.out.println("Invalid options selected");
+						break;
+						
+				}
+				System.out.println(account);
+			}while(i<1);
 		}
 		scan.close();
 	}

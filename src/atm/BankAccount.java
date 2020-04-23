@@ -31,10 +31,15 @@ public class BankAccount {
 	}
 	
 	public void depoist(double amount) {
-		this.balance +=amount;
+		setBalance(this.balance + amount);
 	}
 	
 	public void withdraw(double amount) {
-		this.balance -=amount;
+		if(getBalance()>= amount) {
+			setBalance(this.balance - amount);
+		}else {
+			System.out.println("Insufficent funds");
+		}
+		
 	}
 }
