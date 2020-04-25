@@ -46,6 +46,18 @@ public class atmRunner {
 			}while(i<1);
 		}
 		scan.close();
+		logout(fileToRead, account);
+			
+	}
+
+	private static void logout(Path fileToRead, BankAccount account) throws IOException {
+		if(Files.deleteIfExists(fileToRead)) {
+			List<String> newlist = List.of(account.getName(),Integer.toString(account.getPin()),Double.toString(account.getBalance()));
+			Files.write(fileToRead, newlist);
+			System.out.println("Changes Saved!");
+		}else {
+			System.out.println("Unable to save changes!");
+		}
 	}
 	
 	private static boolean login(BankAccount account) {
